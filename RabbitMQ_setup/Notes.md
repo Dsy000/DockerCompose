@@ -17,10 +17,21 @@ services:
       RABBITMQ_DEFAULT_PASS: admin
       RABBITMQ_DEFAULT_VHOST: /
     volumes:
-      - rabbitmq_data:/var/lib/rabbitmq 
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      default:
+        ipv4_address: 192.16.1.2
 
 volumes:
-  rabbitmq_data: 
+  rabbitmq_data:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.16.1.0/24
 ```
 
 2) Create service for rabbitmq
