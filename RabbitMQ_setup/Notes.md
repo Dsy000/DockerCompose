@@ -47,8 +47,8 @@ After=docker.service
 Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=/opt/rabbitMq/
-ExecStart=/usr/local/bin/docker-compose up -d
-ExecStop=/usr/local/bin/docker-compose down
+ExecStart=/usr/local/bin/docker compose up -d
+ExecStop=/usr/local/bin/docker compose down
 
 [Install]
 WantedBy=multi-user.target
