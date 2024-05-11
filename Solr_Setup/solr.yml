@@ -1,0 +1,16 @@
+version: '1'
+
+services:
+  solr:
+    image: solr:9.6.0
+    container_name: solr_container
+    ports:
+      - "8983:8983"
+    volumes:
+      - solr_data:/opt/solr/server/solr/mycores
+    environment:
+      SOLR_HOME: /opt/solr/server/solr/mycores
+    command: solr-precreate mycores
+
+volumes:
+  solr_data: 

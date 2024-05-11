@@ -1,0 +1,12 @@
+version: '3'
+services:
+  apache:
+    image: httpd:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      -   apache_data:/usr/local/apache2/
+
+volumes:
+  apache_data: 
