@@ -1,0 +1,32 @@
+FROM openjdk:8-jre
+
+# Install dependencies
+RUN apt-get update && apt-get install -y wget netcat
+
+# Set environment variables
+ENV STORM_VERSION=2.2.0
+ENV ZOOKEEPER_VERSION=3.6.3
+
+# Install Zookeeper
+RUN wget https://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz \
+    && tar -xzf apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz \
+    && mv apache-zookeeper-$ZOOKEEPER_VERSION-bin /opt/zookeeper \
+    && rm apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz
+
+# Install Storm
+RUN wget https://archive.apache.org/dist/storm/apache-storm-$STORM_VERSION/apache-storm-$STORM_VERSION.tar.gz \
+    && tar -xzf apache-storm-$STORM_VERSION.tar.gz \
+    && mv apache-storm-$STORM_VERSION /opt/storm \
+    && rm apache-storm-$STORM_VERSION.tar.gz
+
+# Add configuration files
+COPY storm.yaml /opt/storm/conf/storm.yaml
+
+# Add entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Expose ports
+EXPOSE 6627 8080 8081
+
+ENTRYPOINT ["/entrypoint.sh"]
