@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "443:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./certs:/certs
+    environment:
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_SERVER_HTTPS_PORT=443
+      - GF_SECURITY_ADMIN_PASSWORD=your_admin_password
+      - GF_SERVER_CERT_FILE=/certs/grafana.crt
+      - GF_SERVER_KEY_FILE=/certs/grafana.key
+    restart: always
+
+volumes:
+  grafana-data:
