@@ -1,3 +1,4 @@
+#Deploye on Docker swarm cluster 
 docker stack deploy --compose-file docker-compose.yml storm
 docker service ls
 docker service update --replicas=2 storm_supervisor
