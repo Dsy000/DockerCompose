@@ -1,0 +1,10 @@
+mkdir nginx-loadbalancer
+cd nginx-loadbalancer
+
+#Configure Nginx
+mkdir -p nginx/conf.d nginx/logs
+
+nginx/conf.d/default.conf
+
+#Run Docker Compose
+docker-compose up -d
