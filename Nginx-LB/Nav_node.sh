@@ -49,3 +49,22 @@ stream {
             proxy_connect_timeout 1s;
         }
     }
+
+------------------------------------------------------------
+
+root@lappsrv1218:~# cat /etc/systemd/system/nginx_comp.service
+[Unit]
+Description=Nginx Container Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/Nginx-Comp/
+ExecStart=/usr/bin/docker compose up -d
+ExecStop=/usr/bin/docker compose down
+
+[Install]
+WantedBy=multi-user.target
+root@lappsrv1218:~# 
